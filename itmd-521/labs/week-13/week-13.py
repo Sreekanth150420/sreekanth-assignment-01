@@ -51,6 +51,8 @@ splitDF = df.withColumn('WeatherStation', df['_c0'].substr(5, 6)) \
 splitDF.printSchema()
 splitDF.show(5)
 
+parquet_write_df = splitDF
+
 # part 2
 
 splitDF.write.csv("s3a://sthupakula/90-uncompressed.csv")
@@ -59,6 +61,8 @@ splitDF.write.csv("s3a://sthupakula/90-uncompressed.csv")
 splitDF.write.mode("compression","lz4").csv("s3a://sthupakula/90-compressed.csv")
 
 splitDF.write.coalesce(1).csv("s3a://sthupakula/90.csv")
+
+splitDF.write.parquet("s3a://sthupakula/90.parquet")
 
 
 
