@@ -51,7 +51,6 @@ splitDF = df.withColumn('WeatherStation', df['_c0'].substr(5, 6)) \
 splitDF.printSchema()
 splitDF.show(5)
 
-parquet_write_df = splitDF
 
 # part 2
 
