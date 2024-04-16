@@ -58,6 +58,8 @@ splitDF.write.csv("s3a://sthupakula/90-uncompressed.csv")
 
 splitDF.write.mode("compression","lz4").csv("s3a://sthupakula/90-compressed.csv")
 
+splitDF.write.coalesce(1).csv("s3a://sthupakula/90.csv")
+
 
 
 
