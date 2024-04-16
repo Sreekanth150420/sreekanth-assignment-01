@@ -51,3 +51,8 @@ splitDF = df.withColumn('WeatherStation', df['_c0'].substr(5, 6)) \
 splitDF.printSchema()
 splitDF.show(5)
 
+# part 2
+
+splitDF.write.csv("s3a://sthupakula/90-uncompressed.csv")
+
+
