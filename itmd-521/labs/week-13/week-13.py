@@ -1,7 +1,7 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
-from pyspark.sql.types import IntegerType
-from pyspark.sql.functions import to_date
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
 
 # Removing hard coded password - using os module to import them
 import os
@@ -11,8 +11,8 @@ conf = SparkConf()
 conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:3.3.0')
 conf.set('spark.hadoop.fs.s3a.aws.credentials.provider', 'org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider')
 
-conf.set('spark.hadoop.fs.s3a.access.key', os.getenv('ACCESSKEY'))
-conf.set('spark.hadoop.fs.s3a.secret.key', os.getenv('SECRETKEY'))
+conf.set('spark.hadoop.fs.s3a.access.key', 'sthupakula')
+conf.set('spark.hadoop.fs.s3a.secret.key', 'cb1d7110-eb0a-11ee-b25d-8f5b728a3f7f')
 # Configure these settings
 # https://medium.com/@dineshvarma.guduru/reading-and-writing-data-from-to-minio-using-spark-8371aefa96d2
 conf.set("spark.hadoop.fs.s3a.path.style.access", "true")
