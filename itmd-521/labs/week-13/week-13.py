@@ -55,13 +55,14 @@ parquet_write_df = splitDF
 
 # part 2
 
-#splitDF.write.csv("s3a://sthupakula/90-uncompressed.csv")
+splitDF.write.mode("overwrite").option("header","true").csv("s3a://sthupakula/90-uncompressed.csv")
 
 
-#splitDF.write.option("compression","lz4").csv("s3a://sthupakula/90-compressed.csv")
+splitDF.write.mode("overwrite").option("header","true").option("compression","lz4").csv("s3a://sthupakula/90-compressed.csv")
+
 parquet_write_df.write.mode("overwrite").parquet("s3a://sthupakula/90.parquet")
 
-splitDF.coalesce(1).write.mode("overwrite").csv("s3a://sthupakula/90.csv")
+splitDF.coalesce(1).write.mode("overwrite").option("header","true").csv("s3a://sthupakula/90.csv")
 
 
 
