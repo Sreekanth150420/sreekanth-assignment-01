@@ -59,10 +59,11 @@ parquet_write_df = splitDF
 
 
 #splitDF.write.option("compression","lz4").csv("s3a://sthupakula/90-compressed.csv")
+parquet_write_df.write.mode("overwrite").parquet("s3a://sthupakula/90.parquet")
 
-splitDF.coalesce(1).write.csv("s3a://sthupakula/90.csv")
+splitDF.coalesce(1).write.mode("overwrite").csv("s3a://sthupakula/90.csv")
 
-parquet_write_df.write.parquet("s3a://sthupakula/90.parquet")
+
 
 
 
