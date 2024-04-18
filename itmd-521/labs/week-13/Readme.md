@@ -31,6 +31,8 @@ Include ScreenShot of `ls` command of your home directory on Spark-Edge server s
 
 You need to set your `SECRETKEY` and `ACCESSKEY` in your `.bashrc` file and import then into your PySpark files, no hard-coding of secrets.
 
+![](./images/git_clone.png)
+
 ## Part Two - Data Engineering 
 
 The raw data records look like this:
@@ -80,6 +82,8 @@ Modify the value in the `appName` function. Use your HAWKID (not the @hawk part)
 * Create a Parquet file
   * Name the file: 50.parquet (where 50 is the decade you were assigned)
 * Write/Save these to your Minio Bucket
+
+![](./images/part_2.png)
 
 ### Part Three deliverable
 
