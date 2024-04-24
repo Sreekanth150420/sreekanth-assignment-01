@@ -35,7 +35,7 @@ averagedf = splitDF.select(month(col('ObservationDate')).alias('Month'),year(col
              .where((col('Temperature') > -50) & (col('Temperature') < 50)).groupBy('Month','Year').agg(avg('Temperature').alias('average')).orderBy('Year','Month')
 averagedf.show()
 #The stddf calculates the average from the averagedf for all month over the decade with groupby month
-stddf = averagedf.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average'))
+stddf = averagedf.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average')).orderBy('Month')
 stddf.show()
 csvdf = stddf
 #Writing output to minio
