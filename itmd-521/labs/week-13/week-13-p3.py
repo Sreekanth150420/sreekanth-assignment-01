@@ -33,8 +33,7 @@ averagedf = splitDF.select(month(col('ObservationDate')).alias('Month'),year(col
 averagedf.show()
 stddf = averagedf.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average'))
 stddf.show()
-
+csvdf = stddf
 stddf.write.mode("overwrite").parquet("s3a://sthupakula/part-three.parquet")
-
-splitDF.coalesce(1).write.mode("overwrite").option("header","true").csv("s3a://sthupakula/part-three.csv")
+csvdf.write.mode("overwrite").option("header","true").csv("s3a://sthupakula/part-three.csv")
 
