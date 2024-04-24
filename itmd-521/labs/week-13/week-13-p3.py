@@ -33,10 +33,8 @@ splitDF = spark.read.parquet('s3a://sthupakula/90.parquet')
 # above 50
 averagedf = splitDF.select(month(col('ObservationDate')).alias('Month'),year(col('ObservationDate')).alias('Year'),col('AirTemperature').alias('Temperature'))\
              .where((col('Temperature') > -50) & (col('Temperature') < 50)).groupBy('Month','Year').agg(avg('Temperature').alias('average')).orderBy('Year','Month')
-averagedf.show()
 #The stddf calculates the average from the averagedf for all month over the decade with groupby month
 stddf = averagedf.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average')).orderBy('Month')
-stddf.show()
 csvdf = stddf
 #Writing output to minio
 stddf.write.mode("overwrite").parquet("s3a://sthupakula/part-three.parquet")
