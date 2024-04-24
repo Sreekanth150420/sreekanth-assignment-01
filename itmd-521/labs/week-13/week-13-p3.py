@@ -27,7 +27,7 @@ conf.set("spark.hadoop.fs.s3a.endpoint", "http://infra-minio-proxy-vm0.service.c
 spark = SparkSession.builder.appName("sthupakula p3 ").config('spark.driver.host','spark-edge.service.consul').config(conf=conf).getOrCreate()
 
 
-splitDF = spark.read.parquet('s3a://sthupakula/80.parquet')
+splitDF = spark.read.parquet('s3a://sthupakula/90.parquet')
 averagedf = splitDF.select(month(col('ObservationDate')).alias('Month'),year(col('ObservationDate')).alias('Year'),col('AirTemperature').alias('Temperature'))\
              .where((col('Temperature') > -50) & (col('Temperature') < 50)).groupBy('Month','Year').agg(avg('Temperature').alias('average')).orderBy('Year','Month')
 averagedf.show()
