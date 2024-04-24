@@ -11,8 +11,8 @@ conf = SparkConf()
 conf.set('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:3.3.0')
 conf.set('spark.hadoop.fs.s3a.aws.credentials.provider', 'org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider')
 
-conf.set('spark.hadoop.fs.s3a.access.key', 'sthupakula')
-conf.set('spark.hadoop.fs.s3a.secret.key', 'cb1d7110-eb0a-11ee-b25d-8f5b728a3f7f')
+conf.set('spark.hadoop.fs.s3a.access.key', os.getenv('ACCESSKEY'))
+conf.set('spark.hadoop.fs.s3a.secret.key', os.getenv('SECRETKEY'))
 # Configure these settings
 # https://medium.com/@dineshvarma.guduru/reading-and-writing-data-from-to-minio-using-spark-8371aefa96d2
 conf.set("spark.hadoop.fs.s3a.path.style.access", "true")
@@ -31,7 +31,7 @@ splitDF = spark.read.parquet('s3a://sthupakula/90.parquet')
 averagedf = splitDF.select(month(col('ObservationDate')).alias('Month'),year(col('ObservationDate')).alias('Year'),col('AirTemperature').alias('Temperature'))\
              .where((col('Temperature') > -50) & (col('Temperature') < 50)).groupBy('Month','Year').agg(avg('Temperature').alias('average')).orderBy('Year','Month')
 averagedf.show()
-stddf = avg_df.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average'))
+stddf = averagedf.select(col('Month'),col('average')).groupBy('Month').agg(stddev('average'))
 stddf.show()
 
 stddf.write.mode("overwrite").parquet("s3a://sthupakula/part-three.parquet")
